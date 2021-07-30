@@ -172,6 +172,19 @@
 
         //display the message
         //return the score
+    function playRound () {
+        let player;
+        let computer;
+        let message; 
+        let score;
+
+        player = playerSelection();
+        computer = computerSelection();
+
+        [message, score] = determineWinner(player, computer);
+        console.log(message);
+        return score;
+    }
 
     //function playGame()
         //create int variable roundNumber with value 1
@@ -193,6 +206,32 @@
             //display the message: "You won! Congratulations!"
         //else
             //display the message: "You lost! Better luck next time!" 
+        
+            function playGame () {
+                let roundNumber = 1;
+                let score = 0;
+                let scoreCard = [];
+                let overallWinner = 0;
+
+                const summation = (accumulator, currentValue) => accumulator + currentValue;
+
+                console.log("Game On! Best of five, draws don't count!");
+
+                while (roundNumber <= 5) {
+                    score = playRound()
+                    if (score != 0) {
+                        roundNumber++
+                        scoreCard.push(score);
+                    }
+                }
+                overallWinner = scoreCard.reduce(summation);
+                if (overallWinner > 0) {
+                    console.log("You won! Congratulations!")
+                } else {
+                    console.log("You lost! Better luck next time!")
+                }
+                console.log("Refresh the page to try again.")
+            }
 
 
   </script>
