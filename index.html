@@ -9,6 +9,7 @@
     // ALGORITHM
 
     // run the function playGame()
+    playGame();
 
     // function computerSelection
         //create number variable randomChoice
@@ -19,6 +20,16 @@
             //return 'paper'
         //else
             //return 'scissors'
+    function computerSelection () {
+        let randomChoice = Math.random();
+        if (randomChoice <= 0.33) {
+            return 'rock';
+        } else if (randomChoice <= 0.67) {
+            return 'paper';
+        } else {
+            return 'scissors';
+        }
+    }
 
     //function playerSelection
         //create string variable playerChoice
@@ -33,6 +44,21 @@
                 //assign keepGoing False
         //end
         //return playerChoice
+    
+    function playerSelection () {
+        let playerChoice;
+        let keepGoing = true;
+
+        while (keepGoing) {
+            playerChoice = prompt("Please choose from: Rock, paper or scissors").toLowerCase();
+            if (playerChoice != 'rock' || playerChoice != 'paper' || playerChoice != 'scissors') {
+                alert("ERROR! Your entry was not recognised.");
+            } else {
+                keepGoing = false;
+            }
+        }
+        return playerChoice;
+    }
 
     //function determineWinner(player, computer)
         //create a string variable called message
@@ -77,6 +103,61 @@
                     //assign message: 'It's a draw! Try again!'
                     //assign score: 0
                     //return the message and score
+    function determineWinner (player, computer) {
+        let message;
+        let score
+
+        switch (player) {
+            case 'rock':
+                if (computer == 'rock') {
+                    message = "It's a draw! Try again!";
+                    score = 0;
+                    return [message, score];
+                } else if (computer == 'paper') {
+                    message = 'You lose this round! Their paper beats your rock!';
+                    score = -1;
+                    return [message, score];
+                } else {
+                    message = 'You win this round! Your rock beats their scissors!';
+                    score = 1;
+                    return [message, score];
+                }
+                break;
+            case 'paper':
+                if (computer == 'rock') {
+                    message = 'You win this round! Your paper beats their rock!';
+                    score = 1;
+                    return [message, score];
+                } else if (computer == 'paper') {
+                    message = "It's a draw! Try again!";
+                    score = 0;
+                    return [message, score];
+                } else {
+                    message = 'You lose this round! Their scissors beats your paper!';
+                    score = -1;
+                    return [message, score]
+                }
+                break;
+            case 'scissors':
+                if (computer == 'rock') {
+                    message = 'You lose this round! Their rock beats your scissors!';
+                    score = -1;
+                    return [message, score]
+                } else if (computer == 'paper') {
+                    message = 'You win this round! Your scissors beats their paper!';
+                    score = 1;
+                    return [message, score]
+                } else {
+                    message = "It's a draw! Try again!";
+                    score = 0;
+                    return [message, score]
+                }
+                break;
+            default:
+                console.log("Error Something Went Wrong")
+
+        }
+    }
 
     //function playRound()
         //create string variable player
