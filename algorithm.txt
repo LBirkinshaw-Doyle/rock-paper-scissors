@@ -1,0 +1,76 @@
+1. Create function called computerPlay that will randomly return either ‘Rock’, ‘Paper’ or ‘Scissors’
+2. Write a function that plays a single round of Rock Paper Scissors. The function should take two parameters - the playerSelection and computerSelection - 
+   and then return a string that declares the winner of the round like so: "You Lose! Paper beats Rock"
+3. Make your function’s playerSelection parameter case-insensitive (so users can input rock, ROCK, RocK or any other variation).
+4. Write a NEW function called game(). Use the previous function inside of this one to play a 5 round game that keeps score and reports a winner or loser at the end.
+    Use prompt() to get input from the user. Read the docs here if you need to.
+
+ALGORITHM
+
+function computerPlay
+    create number variable randomChoice
+    assign randomChoice a random number between 0 & 1
+    if randomChoice <= 0.33
+        return 'rock'
+    else if randomChoice <= 0.66
+        return 'paper'
+    else
+        return 'scissors'
+
+function playerSelection
+    create string variable playerChoice
+    create boolean variable keepGoing = True
+    while keepGoing is true
+        ask the player what choice they make "Please choose from: Rock, paper, or scissors"
+        assign playerChoice a string entered by the user
+        make playerChoice lowercase
+        if playerChoice is not  'rock', 'paper' or 'scissors'
+            display an error message
+        else
+            assign keepGoing False
+    end
+    return playerChoice
+
+function determineWinner
+    create a string variable called message
+    create a number variable called score
+    create a switch statement on playerSelection()
+        in the case that playerSelection = 'rock'
+            if computerPlay is 'rock'
+                assign message: 'It's a draw! Try again!'
+                assign score: 0
+                return the message and score
+            else if computerPlay is 'paper'
+                assign message: 'You lose! Their paper beats your rock!'
+                assign score: -1
+                return the message and score
+            else
+                assign message: 'You win! Your rock beats their scissors!'
+                assign score: 1
+                return the message and score
+        in the case that playerSelection = 'paper'
+            if computerPlay is 'rock'
+                assign message: 'You win! Your paper beats their rock!'
+                assign score: 1
+                return the message and score
+            else if computerPlay is 'paper'
+                assign message: 'It's a draw! Try again!'
+                assign score: 0
+                return the message and score
+            else
+                assign message: 'You lose! Their scissors beats your paper!'
+                assign score: -1
+                return the message and score
+        in the case that playerSelection = 'scissors'
+            if computerPlay is 'rock'
+                assign message: 'You lose! Their rock beats your scissors!'
+                assign score: -1
+                return the message and score
+            else if computerPlay is 'paper'
+                assign message: 'You win! Your scissors beats their paper!'
+                assign score: 1
+                return the message and score
+            else
+                assign message: 'It's a draw! Try again!'
+                assign score: 0
+                return the message and score
