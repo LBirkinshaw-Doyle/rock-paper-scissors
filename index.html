@@ -50,8 +50,9 @@
         let keepGoing = true;
 
         while (keepGoing) {
-            playerChoice = prompt("Please choose from: Rock, paper or scissors").toLowerCase();
-            if (playerChoice != 'rock' || playerChoice != 'paper' || playerChoice != 'scissors') {
+            playerChoice = prompt("Please choose from: Rock, paper or scissors");
+            playerChoice.toLowerCase()
+            if (playerChoice != 'rock' && playerChoice != 'paper' && playerChoice != 'scissors') {
                 alert("ERROR! Your entry was not recognised.");
             } else {
                 keepGoing = false;
