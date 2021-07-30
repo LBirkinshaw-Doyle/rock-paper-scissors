@@ -3,11 +3,10 @@
    and then return a string that declares the winner of the round like so: "You Lose! Paper beats Rock"
 3. Make your function’s playerSelection parameter case-insensitive (so users can input rock, ROCK, RocK or any other variation).
 4. Write a NEW function called game(). Use the previous function inside of this one to play a 5 round game that keeps score and reports a winner or loser at the end.
-    Use prompt() to get input from the user. Read the docs here if you need to.
 
 ALGORITHM
 
-function computerPlay
+function computerSelection
     create number variable randomChoice
     assign randomChoice a random number between 0 & 1
     if randomChoice <= 0.33
@@ -31,16 +30,16 @@ function playerSelection
     end
     return playerChoice
 
-function determineWinner
+function determineWinner(player, computer)
     create a string variable called message
     create a number variable called score
-    create a switch statement on playerSelection()
-        in the case that playerSelection = 'rock'
-            if computerPlay is 'rock'
+    create a switch statement on input variable player
+        in the case that player = 'rock'
+            if computer is 'rock'
                 assign message: 'It's a draw! Try again!'
                 assign score: 0
                 return the message and score
-            else if computerPlay is 'paper'
+            else if computer is 'paper'
                 assign message: 'You lose! Their paper beats your rock!'
                 assign score: -1
                 return the message and score
@@ -48,12 +47,12 @@ function determineWinner
                 assign message: 'You win! Your rock beats their scissors!'
                 assign score: 1
                 return the message and score
-        in the case that playerSelection = 'paper'
-            if computerPlay is 'rock'
+        in the case that player = 'paper'
+            if computer is 'rock'
                 assign message: 'You win! Your paper beats their rock!'
                 assign score: 1
                 return the message and score
-            else if computerPlay is 'paper'
+            else if computer is 'paper'
                 assign message: 'It's a draw! Try again!'
                 assign score: 0
                 return the message and score
@@ -61,12 +60,12 @@ function determineWinner
                 assign message: 'You lose! Their scissors beats your paper!'
                 assign score: -1
                 return the message and score
-        in the case that playerSelection = 'scissors'
-            if computerPlay is 'rock'
+        in the case that player = 'scissors'
+            if computer is 'rock'
                 assign message: 'You lose! Their rock beats your scissors!'
                 assign score: -1
                 return the message and score
-            else if computerPlay is 'paper'
+            else if computer is 'paper'
                 assign message: 'You win! Your scissors beats their paper!'
                 assign score: 1
                 return the message and score
@@ -74,3 +73,18 @@ function determineWinner
                 assign message: 'It's a draw! Try again!'
                 assign score: 0
                 return the message and score
+
+function playRound()
+    create string variable player
+    create string variable computer
+    create string variable message
+    create string variable score
+
+    assign player the output of playerSelection()
+    assign computer the output of computerSelection()
+
+    assign message and score the output of determineWinner(player, computer)
+
+    display the message
+    return the score
+
