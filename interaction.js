@@ -119,4 +119,53 @@ function playGame () {
 }
 */
 
+let playerScore = 0;
+let compScore = 0;
+let playerChoice = "";
+let compChoice = "";
+
+
+
+function playGame () {
+    playBtn.classList.add('hide');
+    let roundNumber = 0;
+    console.log(playerScore);
+
+    const scoreContainer = document.createElement('div');
+    scoreContainer.classList.add('v-flex')
+    grandContainer.appendChild(scoreContainer)
+    
+    const scoreText = document.createElement('div');
+    scoreText.textContent = "Score";
+    scoreText.classList.add('score');
+    scoreContainer.appendChild(scoreText);
+
+    const dispScores = document.createElement('div');
+    dispScores.textContent = playerScore + " : " + compScore;
+    dispScores.classList.add('score');
+    scoreContainer.appendChild(dispScores);
+
+    if (roundNumber == 5) {
+        endGame();
+        return;
+    }
+    else {
+        [window.playerChoice, window.compChoice] = playerSelection();
+        countdown();
+        let whoWon = determineWinner();
+        endRound(whoWon);
+    }
+
+    
+}
+function playerSelection () {
+    const playerPromt = document.createElement('div');
+    playerPromt.textContent = "CHOOSE YOUR WEAPON!";
+    playerPromt.classList.add('score');
+    grandContainer.appendChild(playerPromt);
+}
+
+const grandContainer = document.querySelector('#grand-container')
+const playBtn = document.getElementById('playButton');
+playBtn.addEventListener('click', playGame);
 
