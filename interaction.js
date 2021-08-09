@@ -150,7 +150,6 @@ function playGame () {
     }
     else {
         playerSelection();
-        console.log(playerChoice);
     }
 
     
@@ -201,8 +200,10 @@ function computerSelection () {
     }
 }
 
-function countdown () {
+function countdown (e) {
+    if (e.propertyName != 'transform') return;
     console.log(playerChoice);
+    console.log(compChoice);
 }
 
 const grandContainer = document.querySelector('#grand-container')
