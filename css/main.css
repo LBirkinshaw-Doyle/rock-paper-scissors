@@ -16,6 +16,9 @@ header{
 .hide{
     display: none;
 }
+.show{
+    display: inline;
+}
 .v-flex{
     display: flex;
     flex-direction: column;
@@ -39,14 +42,18 @@ header{
 .button{
     min-height: 75px;
     min-width: 75px;
-    font-size: 18px;
+    line-height: 75px;
+    font-size: 500%;
     text-align: center;
     padding: 10px;
     border: 2px solid black;
-    transition: all 1s ease;
+    transition: all 0.5s ease;
 }
 .clicked{
     transform: scale(1.1);
     border-color: #ffc600;
     box-shadow: 0 0 1rem #ffc600;
+}
+.pulse{
+    transform: scale(0.8);
 }

@@ -159,15 +159,17 @@ function playerSelection () {
     const playerPromt = document.createElement('div');
     playerPromt.textContent = "CHOOSE YOUR WEAPON!";
     playerPromt.classList.add('score');
+    playerPromt.id = 'playerPromt';
     grandContainer.appendChild(playerPromt);
 
     const buttonContainer = document.createElement('div');
     buttonContainer.classList.add('h-flex');
+    buttonContainer.id = 'buttonContainer'
     grandContainer.appendChild(buttonContainer);
 
     const rockButton = document.createElement('div');
     rockButton.classList.add('button');
-    rockButton.textContent = 'Rock'
+    rockButton.textContent = 'Rock';
     buttonContainer.appendChild(rockButton);
 
     const paperButton = document.createElement('div');
@@ -186,7 +188,9 @@ function playerSelection () {
 
     compChoice = computerSelection();
 
-    window.addEventListener('transitionend', countdown);
+    rockButton.addEventListener('transitionend', countdown);
+    paperButton.addEventListener('transitionend', countdown);
+    scissorsButton.addEventListener('transitionend', countdown);
 }
 
 function computerSelection () {
@@ -200,10 +204,52 @@ function computerSelection () {
     }
 }
 
+function removeClass (e) {
+    if (e.propertyName != 'transform') return;
+    e.target.classList.remove('pulse')
+}
+
 function countdown (e) {
     if (e.propertyName != 'transform') return;
-    console.log(playerChoice);
-    console.log(compChoice);
+
+    grandContainer.removeChild(document.getElementById('playerPromt'));
+    const buttonContainer = document.getElementById('buttonContainer');
+    while (buttonContainer.firstChild) {
+        buttonContainer.removeChild(buttonContainer.firstChild)
+    }
+
+    const countdownButton = document.createElement('div');
+    countdownButton.classList.add('button');
+    countdownButton.id = 'countdownButton'
+    countdownButton.textContent = 3
+    buttonContainer.appendChild(countdownButton);
+
+    let counter = 3;
+    setInterval(function() {   
+        if (counter == 0) {displayWinner(); return;}
+        document.getElementById('countdownButton').textContent = counter;
+        document.getElementById('countdownButton').classList.add('pulse');
+        counter--;
+    }, 1500, counter);
+
+    countdownButton.addEventListener('transitionend', removeClass)
+}
+
+function displayWinner () {
+    const buttonContainer = document.getElementById('buttonContainer');
+    while (buttonContainer.firstChild) {
+        buttonContainer.removeChild(buttonContainer.firstChild)
+    }
+
+    const player = document.createElement('div');
+    player.classList.add('button');
+    player.textContent = playerChoice;
+    buttonContainer.appendChild(player);
+
+    const computer = document.createElement('div');
+    computer.classList.add('button');
+    computer.textContent = compChoice;
+    buttonContainer.appendChild(computer);
 }
 
 const grandContainer = document.querySelector('#grand-container')
