@@ -129,7 +129,6 @@ let compChoice = "";
 function playGame () {
     playBtn.classList.add('hide');
     let roundNumber = 0;
-    console.log(playerScore);
 
     const scoreContainer = document.createElement('div');
     scoreContainer.classList.add('v-flex')
@@ -150,19 +149,60 @@ function playGame () {
         return;
     }
     else {
-        [window.playerChoice, window.compChoice] = playerSelection();
-        countdown();
-        let whoWon = determineWinner();
-        endRound(whoWon);
+        playerSelection();
+        console.log(playerChoice);
     }
 
     
 }
+
 function playerSelection () {
     const playerPromt = document.createElement('div');
     playerPromt.textContent = "CHOOSE YOUR WEAPON!";
     playerPromt.classList.add('score');
     grandContainer.appendChild(playerPromt);
+
+    const buttonContainer = document.createElement('div');
+    buttonContainer.classList.add('h-flex');
+    grandContainer.appendChild(buttonContainer);
+
+    const rockButton = document.createElement('div');
+    rockButton.classList.add('button');
+    rockButton.textContent = 'Rock'
+    buttonContainer.appendChild(rockButton);
+
+    const paperButton = document.createElement('div');
+    paperButton.classList.add('button');
+    paperButton.textContent = 'Paper'
+    buttonContainer.appendChild(paperButton);
+
+    const scissorsButton = document.createElement('div');
+    scissorsButton.classList.add('button');
+    scissorsButton.textContent = 'Scissors'
+    buttonContainer.appendChild(scissorsButton);
+
+    rockButton.addEventListener('click', () => {playerChoice = 'rock'; rockButton.classList.add('clicked');});
+    paperButton.addEventListener('click', () => {playerChoice = 'paper'; paperButton.classList.add('clicked');});
+    scissorsButton.addEventListener('click', () => {playerChoice = 'scissors'; scissorsButton.classList.add('clicked');});
+
+    compChoice = computerSelection();
+
+    window.addEventListener('transitionend', countdown);
+}
+
+function computerSelection () {
+    let randomChoice = Math.random();
+    if (randomChoice <= 0.33) {
+        return 'rock';
+    } else if (randomChoice <= 0.67) {
+        return 'paper';
+    } else {
+        return 'scissors';
+    }
+}
+
+function countdown () {
+    console.log(playerChoice);
 }
 
 const grandContainer = document.querySelector('#grand-container')

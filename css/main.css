@@ -27,11 +27,26 @@ header{
     display: flex;
     flex-direction: row;
     align-items: center;
-    margin: auto;
+    justify-content: space-evenly;
+    margin: 20px;
     flex-grow: 1;
 }
 .score{
     font-size: 20px;
     text-align: center;
     padding: 5px 10px;
+}
+.button{
+    min-height: 75px;
+    min-width: 75px;
+    font-size: 18px;
+    text-align: center;
+    padding: 10px;
+    border: 2px solid black;
+    transition: all 1s ease;
+}
+.clicked{
+    transform: scale(1.1);
+    border-color: #ffc600;
+    box-shadow: 0 0 1rem #ffc600;
 }
