@@ -137,11 +137,13 @@ function playGame () {
     const scoreText = document.createElement('div');
     scoreText.textContent = "Score";
     scoreText.classList.add('score');
+    scoreText.id = 'scoreText'
     scoreContainer.appendChild(scoreText);
 
     const dispScores = document.createElement('div');
     dispScores.textContent = playerScore + " : " + compScore;
     dispScores.classList.add('score');
+    dispScores.id = 'dispScores'
     scoreContainer.appendChild(dispScores);
 
     if (roundNumber == 5) {
@@ -156,6 +158,7 @@ function playGame () {
 }
 
 function playerSelection () {
+    console.log('playerSelection called');
     const playerPromt = document.createElement('div');
     playerPromt.textContent = "CHOOSE YOUR WEAPON!";
     playerPromt.classList.add('score');
@@ -194,6 +197,7 @@ function playerSelection () {
 }
 
 function computerSelection () {
+    console.log('computerSelection called');
     let randomChoice = Math.random();
     if (randomChoice <= 0.33) {
         return 'rock';
@@ -210,6 +214,7 @@ function removeClass (e) {
 }
 
 function countdown (e) {
+    console.log('countdown called');
     if (e.propertyName != 'transform') return;
 
     grandContainer.removeChild(document.getElementById('playerPromt'));
@@ -225,8 +230,12 @@ function countdown (e) {
     buttonContainer.appendChild(countdownButton);
 
     let counter = 3;
-    setInterval(function() {   
-        if (counter == 0) {displayWinner(); return;}
+    let interval = setInterval(function() {
+        if (counter == 0) {
+            clearInterval(interval);
+            displayWinner();
+            return;
+        }
         document.getElementById('countdownButton').textContent = counter;
         document.getElementById('countdownButton').classList.add('pulse');
         counter--;
@@ -235,7 +244,29 @@ function countdown (e) {
     countdownButton.addEventListener('transitionend', removeClass)
 }
 
+function determineWhoWon (playerChoice, compChoice) {
+    //console.log('determineWhoWon called');
+    switch (playerChoice) {
+        case 'rock':
+            if (compChoice == 'rock') return 'draw';
+            else if (compChoice == 'paper') return 'computer';
+            else return 'player';
+        case 'paper':
+            if (compChoice == 'rock') return 'player';
+            else if (compChoice == 'paper') return 'draw';
+            else return 'computer';
+        case 'scissors':
+            if (compChoice == 'rock') return 'computer';
+            else if (compChoice == 'paper') return 'player';
+            else return 'draw';
+        default:
+        break
+    }
+
+}
+
 function displayWinner () {
+    //console.log('displayWinner called');
     const buttonContainer = document.getElementById('buttonContainer');
     while (buttonContainer.firstChild) {
         buttonContainer.removeChild(buttonContainer.firstChild)
@@ -250,6 +281,30 @@ function displayWinner () {
     computer.classList.add('button');
     computer.textContent = compChoice;
     buttonContainer.appendChild(computer);
+
+    let whoWon = determineWhoWon(playerChoice, compChoice);
+    switch (whoWon) {
+        case 'player':
+            player.classList.add('clicked');
+            playerScore++;
+            document.getElementById('dispScores').textContent = playerScore + " : " + compScore;
+        break;
+        case 'computer':
+            computer.classList.add('clicked');
+            compScore++;
+            document.getElementById('dispScores').textContent = playerScore + " : " + compScore;
+        break;
+        case 'draw':
+            player.classList.add('pulse');
+            computer.classList.add('pulse');
+        break;
+        default:
+        break;
+
+
+    }
+
+
 }
 
 const grandContainer = document.querySelector('#grand-container')
