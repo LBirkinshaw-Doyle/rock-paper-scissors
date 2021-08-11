@@ -161,17 +161,17 @@ function playerSelection () {
     grandContainer.appendChild(buttonContainer);
 
     const rockButton = document.createElement('div');
-    rockButton.classList.add('button');
+    rockButton.classList.add('choice');
     rockButton.textContent = 'Rock';
     buttonContainer.appendChild(rockButton);
 
     const paperButton = document.createElement('div');
-    paperButton.classList.add('button');
+    paperButton.classList.add('choice');
     paperButton.textContent = 'Paper'
     buttonContainer.appendChild(paperButton);
 
     const scissorsButton = document.createElement('div');
-    scissorsButton.classList.add('button');
+    scissorsButton.classList.add('choice');
     scissorsButton.textContent = 'Scissors'
     buttonContainer.appendChild(scissorsButton);
 
@@ -227,7 +227,7 @@ function countdown (e) {
         document.getElementById('countdownButton').textContent = counter;
         document.getElementById('countdownButton').classList.add('pulse');
         counter--;
-    }, 1500, counter);
+    }, 1000, counter);
 
     countdownButton.addEventListener('transitionend', removeClass)
 }
@@ -290,7 +290,7 @@ function displayWinner () {
 
     const nextRound = document.createElement('div');
     nextRound.classList.add('next');
-    nextRound.textContent = 'Next Round'
+    nextRound.textContent = 'Next'
     nextRound.id = 'nextRound';
     grandContainer.appendChild(nextRound);
 
@@ -305,11 +305,40 @@ function continueGame () {
 }
 
 function winScreen () {
-    alert('You Win')
+    const winMessage = document.createElement('div');
+    winMessage.classList.add('score');
+    winMessage.textContent = 'You Win! Congratualations!'
+    winMessage.id = 'winMessage';
+    grandContainer.appendChild(winMessage);
+    playAgain();
 }
 
 function lossScreen () {
-    alert('You Lose!')
+    const lossMessage = document.createElement('div');
+    lossMessage.classList.add('score');
+    lossMessage.textContent = 'You Lose! Comiserations!'
+    lossMessage.id = 'lossMessage';
+    grandContainer.appendChild(lossMessage);
+    playAgain();
+}
+
+function playAgain () {
+    const playAgainButton = document.createElement('div');
+    playAgainButton.classList.add('next');
+    playAgainButton.textContent = 'Play Again?';
+    grandContainer.appendChild(playAgainButton);
+
+    playAgainButton.addEventListener('click', () => {
+        while (!grandContainer.lastChild.classList.contains('start')) {
+            grandContainer.removeChild(grandContainer.lastChild)
+        }
+        playBtn.classList.remove('hide');
+        playerScore = 0;
+        compScore = 0;
+        playerChoice = "";
+        compChoice = "";
+    })
+    
 }
 
 function clearScreen () {
