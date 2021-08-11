@@ -1,16 +1,25 @@
+html{
+    height: 100%;
+    margin: 0;
+}
 header{
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    height: 20%;
     padding: 10px 15px;
 }
-
-#playButton{
-    border: 5px solid chocolate;
+body{
+    height: 80%;
+    margin: 0%;
 }
+
 #grand-container{
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
+    margin: auto;
+    height: 100%;
     padding: 10px 15px;
 }
 .hide{
@@ -48,6 +57,12 @@ header{
     padding: 10px;
     border: 2px solid black;
     transition: all 0.5s ease;
+}
+.next{
+    text-align: center;
+    padding: 10px;
+    border: 2px solid black;
+    margin: auto;
 }
 .clicked{
     transform: scale(1.1);

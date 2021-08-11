@@ -126,9 +126,8 @@ let compChoice = "";
 
 
 
-function playGame () {
+function createScores () {
     playBtn.classList.add('hide');
-    let roundNumber = 0;
 
     const scoreContainer = document.createElement('div');
     scoreContainer.classList.add('v-flex')
@@ -146,19 +145,10 @@ function playGame () {
     dispScores.id = 'dispScores'
     scoreContainer.appendChild(dispScores);
 
-    if (roundNumber == 5) {
-        endGame();
-        return;
-    }
-    else {
-        playerSelection();
-    }
-
-    
+    playerSelection();    
 }
 
 function playerSelection () {
-    console.log('playerSelection called');
     const playerPromt = document.createElement('div');
     playerPromt.textContent = "CHOOSE YOUR WEAPON!";
     playerPromt.classList.add('score');
@@ -197,7 +187,6 @@ function playerSelection () {
 }
 
 function computerSelection () {
-    console.log('computerSelection called');
     let randomChoice = Math.random();
     if (randomChoice <= 0.33) {
         return 'rock';
@@ -214,7 +203,6 @@ function removeClass (e) {
 }
 
 function countdown (e) {
-    console.log('countdown called');
     if (e.propertyName != 'transform') return;
 
     grandContainer.removeChild(document.getElementById('playerPromt'));
@@ -245,7 +233,6 @@ function countdown (e) {
 }
 
 function determineWhoWon (playerChoice, compChoice) {
-    //console.log('determineWhoWon called');
     switch (playerChoice) {
         case 'rock':
             if (compChoice == 'rock') return 'draw';
@@ -266,7 +253,6 @@ function determineWhoWon (playerChoice, compChoice) {
 }
 
 function displayWinner () {
-    //console.log('displayWinner called');
     const buttonContainer = document.getElementById('buttonContainer');
     while (buttonContainer.firstChild) {
         buttonContainer.removeChild(buttonContainer.firstChild)
@@ -295,19 +281,44 @@ function displayWinner () {
             document.getElementById('dispScores').textContent = playerScore + " : " + compScore;
         break;
         case 'draw':
-            player.classList.add('pulse');
-            computer.classList.add('pulse');
+            player.classList.add('clicked');
+            computer.classList.add('clicked');
         break;
         default:
         break;
-
-
     }
 
+    const nextRound = document.createElement('div');
+    nextRound.classList.add('next');
+    nextRound.textContent = 'Next Round'
+    nextRound.id = 'nextRound';
+    grandContainer.appendChild(nextRound);
 
+    nextRound.addEventListener('click', continueGame)
+}
+
+function continueGame () {
+    clearScreen()
+    if (playerScore == 3) winScreen();
+    else if (compScore == 3) lossScreen();
+    else playerSelection();
+}
+
+function winScreen () {
+    alert('You Win')
+}
+
+function lossScreen () {
+    alert('You Lose!')
+}
+
+function clearScreen () {
+    while (!grandContainer.lastChild.classList.contains('v-flex')) {
+        grandContainer.removeChild(grandContainer.lastChild)
+    }
 }
 
 const grandContainer = document.querySelector('#grand-container')
 const playBtn = document.getElementById('playButton');
-playBtn.addEventListener('click', playGame);
+playBtn.addEventListener('click', createScores);
 
