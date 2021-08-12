@@ -3,11 +3,12 @@ html{
     margin: 0;
     background-color: #394452;
     color: white;
+    font-family: "Lucida Console", "Courier New", monospace;
 }
 header{
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: center;
     height: 20%;
     padding: 10px 15px;
 }
@@ -15,7 +16,6 @@ body{
     height: 80%;
     margin: 0%;
 }
-
 #grand-container{
     display: flex;
     flex-direction: column;
@@ -31,16 +31,26 @@ body{
     display: inline;
 }
 .title{
-    margin: auto;
+    display: flex;
+    flex-direction: row;
+    margin: 5px;
     padding: 20px;
-    width: 45px;
+    min-width: 45px;
+    height: 100px;
+    font-size: 5em;
+    font-weight: bolder;
+    text-shadow: 2px 1px gray;
 }
 .v-flex{
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin: auto;
-    flex-grow: 1;
+    justify-content: center;
+    margin: 20px auto;
+    flex-grow: 0.2;
+    width: 20%;
+    border: 1px solid white;
+    border-radius: 50px;
 }
 .h-flex{
     display: flex;
@@ -48,21 +58,28 @@ body{
     align-items: center;
     justify-content: space-evenly;
     margin: 20px;
-    flex-grow: 1;
+    flex-grow: 3;
 }
 .score{
-    font-size: 20px;
+    font-size: 200%;
     text-align: center;
+    vertical-align: middle;
     padding: 5px 10px;
+    margin: auto auto;
+    flex-grow: 0;
 }
 .button{
+    display: flex;
+    align-items: center;
+    justify-content: center;
     min-height: 75px;
     min-width: 75px;
     line-height: 75px;
     font-size: 500%;
     text-align: center;
     padding: 10px;
-    border: 2px solid white;
+    border: 1px solid white;
+    border-radius: 10%;
     transition: all 0.3s ease;
 }
 .choice{
@@ -85,11 +102,9 @@ body{
 .next{
     text-align: center;
     padding: 10px;
-    border: 2px solid black;
+    border: 1px solid white;
+    border-radius: 20px;
     margin: 2em auto 2em auto;
-}
-.start{
-    box-shadow: 0 0 1rem black;
 }
 .message{
     margin: auto;
@@ -98,8 +113,11 @@ body{
 .clicked{
     transform: scale(1.1);
     border-color: #ffc600;
-    box-shadow: 0 0 1rem #ffc600;
+    box-shadow: 0 1px 6px #ffc600;
 }
 .pulse{
     transform: scale(0.8);
 }
+.next:hover{box-shadow: 0 1px 6px white;}
+.start:hover{box-shadow: 0 1px 6px white;}
+.choice:hover{box-shadow: 0 1px 6px white;}
