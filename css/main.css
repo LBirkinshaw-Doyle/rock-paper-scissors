@@ -1,6 +1,8 @@
 html{
     height: 100%;
     margin: 0;
+    background-color: #394452;
+    color: white;
 }
 header{
     display: flex;
@@ -60,18 +62,25 @@ body{
     font-size: 500%;
     text-align: center;
     padding: 10px;
-    border: 2px solid black;
+    border: 2px solid white;
     transition: all 0.3s ease;
 }
 .choice{
+    display: flex;
+    align-items: center;
     min-height: 75px;
-    min-width: 360px;
+    min-width: 75px;
     line-height: 75px;
     font-size: 500%;
     text-align: center;
     padding: 10px;
-    border: 2px solid black;
+    border: 1px solid white;
+    border-radius: 10%;
     transition: all 0.3s ease;
+}
+.image{
+    margin: auto;
+    display: block;
 }
 .next{
     text-align: center;

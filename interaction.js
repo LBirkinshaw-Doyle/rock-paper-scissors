@@ -124,6 +124,19 @@ let compScore = 0;
 let playerChoice = "";
 let compChoice = "";
 
+const grandContainer = document.querySelector('#grand-container');
+const playBtn = document.getElementById('playButton');
+
+const rockLogo = document.createElement('img');
+rockLogo.src = '/images/RockLogo.bmp';
+rockLogo.classList.add('image');
+const paperLogo = document.createElement('img');
+paperLogo.src = '/images/PaperLogo.bmp';
+paperLogo.classList.add('image');
+const scissorsLogo = document.createElement('img');
+scissorsLogo.src = '/images/ScissorsLogo.bmp';
+scissorsLogo.classList.add('image');
+
 
 
 function createScores () {
@@ -162,18 +175,18 @@ function playerSelection () {
 
     const rockButton = document.createElement('div');
     rockButton.classList.add('choice');
-    rockButton.textContent = 'Rock';
     buttonContainer.appendChild(rockButton);
+    rockButton.appendChild(rockLogo);
 
     const paperButton = document.createElement('div');
     paperButton.classList.add('choice');
-    paperButton.textContent = 'Paper'
     buttonContainer.appendChild(paperButton);
+    paperButton.appendChild(paperLogo);
 
     const scissorsButton = document.createElement('div');
     scissorsButton.classList.add('choice');
-    scissorsButton.textContent = 'Scissors'
     buttonContainer.appendChild(scissorsButton);
+    scissorsButton.appendChild(scissorsLogo);
 
     rockButton.addEventListener('click', () => {playerChoice = 'rock'; rockButton.classList.add('clicked');});
     paperButton.addEventListener('click', () => {playerChoice = 'paper'; paperButton.classList.add('clicked');});
@@ -347,7 +360,5 @@ function clearScreen () {
     }
 }
 
-const grandContainer = document.querySelector('#grand-container')
-const playBtn = document.getElementById('playButton');
 playBtn.addEventListener('click', createScores);
 
